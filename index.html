@@ -6,88 +6,44 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button data-type='modal' data='mymodal'>我是垂直居中的模态框</button>
-  <button data-type='modal' data='mymodal1'>我是有好多内容的模态框</button>
-
-  <div class="modal mymodal-modal">
+  <button class="nav-item" data-type="modal" data=".topic-collection-modal">Default Modal</button><br>
+  <div class="modal topic-collection-modal modal-hide">
     <div class="modal-wrapper">
-      <div class="modal-header">
-        <h2 class="title">模态框标题</h2>
-        <div class="close-modal">
-          <div class="close-slide close-left"></div>
-          <div class="close-slide close-right"></div>
-        </div>
-      </div>
-      <div class="modal-body">
-        <p>模态框内容</p>
-        <p> · </p>
-        <p> · </p>
-        <p> · </p>
-        <p> · </p>
-        <p> · </p>
-      </div>
-      <div class="modal-footer">
-        <a class="btn">按钮</a>
-      </div>
+      <div class="modal-header"></div>
+      <div class="modal-body"></div>
+      <div class="modal-footer"></div>
+      <a class="close-btn" data="close"></a>
     </div>
   </div>
 
-  <div class="modal mymodal1-modal">
+  <button class="nav-item" data-type="modal" data=".content-modal">Content Scroll Modal</button><br>
+  <div class="modal content-modal modal-hide">
     <div class="modal-wrapper">
-      <div class="modal-header">
-        <h2 class="title">我是标题</h2>
-        <div class="close-modal">
-          <div class="close-slide close-left"></div>
-          <div class="close-slide close-right"></div>
-        </div>
-      </div>
+      <div class="modal-header"></div>
       <div class="modal-body">
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
-        <p>我是内容</p>
+        <p>...<br>...<br>...<br>...</p>
+        <p>...<br>...<br>...<br>...</p>
+        <p>...<br>...<br>...<br>...</p>
       </div>
-      <div class="modal-footer">
-        <a class="btn">我是按钮</a>
+      <div class="modal-footer"></div>
+      <a class="close-btn" data="close"></a>
+    </div>
+  </div>
+
+  <button class="nav-item" data-type="modal" data=".long-modal">Long Modal</button>
+  <div class="modal long-modal modal-hide">
+    <div class="modal-wrapper">
+      <div class="modal-header"></div>
+      <div class="modal-body">
+        <p>...<br>...<br>...<br>...</p>
+        <p>...<br>...<br>...<br>...</p>
+        <p>...<br>...<br>...<br>...</p>
+        <p>...<br>...<br>...<br>...</p>
+        <p>...<br>...<br>...<br>...</p>
+        <p>...<br>...<br>...<br>...</p>
       </div>
+      <div class="modal-footer"></div>
+      <a class="close-btn" data="close"></a>
     </div>
   </div>
 
