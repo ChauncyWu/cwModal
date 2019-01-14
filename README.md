@@ -1,85 +1,42 @@
-# 模态框
-前言：在写页面时经常会有点击一个按钮弹出一个模态框的需求，Bootstrap的模态框只有固定margin-top，故想自己写一个，在此整理下学习过程中的一些问题。
+# cwModal
+[个人博客-模态框](https://www.chauncywu.com/?p=124)
 
-## 1. 根据模态框内容高度决定模态框是垂直居中显示还是固定margin-top居中显示
-* 当模态框高度小于浏览器可视高度时，模态框垂直居中显示
-* 当模态框高度大于浏览器可视高度时，采用固定margin-top、margin-bottom和左右auto居中显示
+## v3.0
+### 更新
+- 【修复】动画时长一开始为0，在初始化时才设置动画时长
+- 【修复】模态框内含有输入框时在iOS下的光标错位问题以及微信下页面不回弹问题
+- 【修复】修复移动端滚动穿透问题
+- 【修复】将fixed布局改为统一的absolute布局，因此免去了使用modal-fix定位时，需根据modal的宽度手动设置margin-left值，也使得iOS支持更加良好
 
-```
-CSS
+## v2.0
+### 更新
+- 【新增】使模态框的进入以及退出动画的修改更加方便
+- 【修复】内容滚动调整，当模态框在一屏显示时，内容区域允许滚动；当模态框高度超过一屏时，只允许模态框层滚动，内容不能滚动，后续再根据实际需求调整
+- 【修复】修复了由于开启关闭延迟造成的一系列问题
+- 【修复】在需要关闭的dom上添加data='close'即可关闭当前模态框
 
-/*若模态框高度大于浏览器可视高度则采用固定margin-top形式显示模态框*/
-.modal-mar {
-  margin: 0 auto;
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
+### BUG
+- 由于模态框设置了动画，所以刚开始加载页面时会看到模态框
+- 模态框内含有输入框时在iOS下的光标错位问题以及微信下页面不回弹问题
+- 滚动穿透问题
 
-/*若模态框高度小于浏览器可视高度则采用fixed形式垂直居中显示*/
-.modal-fix {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-left: -300px;/*根据模态框宽度/2设置*/
-}
-```
+### 需求
+- 在使用modal-fix定位时，需根据modal的宽度手动设置margin-left值，而不能设置transform: translateX(-50%), 因为后者在添加动画时经常使用
 
-```
-JS
+## v1.0
+### 更新
+- 【新增】开启指定模态框
+- 【新增】关闭全部模态框
+- 【新增】根据模态框高度自适应水平垂直居中
+- 【新增】PC版兼容至IE9及以上版本
+- 【新增】支持开启模态框自动播放指定视频，关闭模态框暂停视频，需手动删除注释，并指定video-data，即video标签的id名
 
-// 浏览器可视高度
-var browserHeight = window.innerHeight;
-// 模态框高度
-var height = $("." + id + "-modal").children(".modal-wrapper").height();
+### BUG
+- 连续的开启和关闭由于存在延迟，造成使用不便，甚至模态框关闭不完全
+- 模态框固定高度，内容区域可滚动，但滚动无效
+- 滚动穿透问题
 
-if(height > browserHeight) {
-  $("." + id + "-modal").children(".modal-wrapper").removeClass('modal-fix');
-  $("." + id + "-modal").children(".modal-wrapper").addClass('modal-mar');
-} else {
-  $("." + id + "-modal").children(".modal-wrapper").removeClass('modal-mar');
-  $("." + id + "-modal").children(".modal-wrapper").addClass('modal-fix');
-  $("." + id + "-modal").children(".modal-wrapper").css('margin-top', -height / 2);
-  // 动态设置margin-top
-}
-```
-
-## 2. 点击关闭按钮和点击遮罩层进而关闭模态框
-* 问题：在设置点击遮罩层时，会出现点击模态框本身也会关闭的情况
-* 解决：阻止事件冒泡
-
-```
-$('.modal').on('click', function() {
-  $('.modal').addClass('modal-hide');
-  $('.modal').removeClass('modal-active');
-  setTimeout(function() {
-    $('.modal').css('display', 'none');
-    $('body').removeClass('modal-open');
-    $('body').css('padding-right', '');
-  }, 300)
-})
-
-$('.modal-wrapper').on('click', function(e) {
-  e.stopPropagation();
-})
-```
-
-## 3. 模态框滚动与body滚动
-* 问题：网页内容过多时会出现滚动条，此时弹出模态框，若模态框内容较少垂直居中显示，则滚动的是body的内容，若模态框内容较多，则滚动的还是body内容，且此时模态框内容被遮挡。
-* 解决：在弹出模态框时，设置body的overflow-y: hidden，设置模态框的overflow-y: auto;
-
-## 4. body宽度改变
-* 问题：在overflow-y: hidden与auto切换时body宽度会改变，体验较差
-* 解决：在overflow-y: hidden与auto切换时动态设置body的padding-left
-
-```
-scrollWidth = window.innerWidth - document.body.clientWidth;
-$('body').css('padding-right', scrollWidth + 'px');
-```
-
-## 5. 渐隐渐现效果
-* 问题：CSS3动画在display: none时是没有效果的，而以上的模态框是通过控制display进行显示的
-* 解决：利用定时器，在设置display: none之前和display: block之后进行动画设置
-
-## 6. 参考资料
-* Bootstrap源码
-
+### 需求
+- 动画样式单一，难以调整
+- 关闭按钮与样式耦合度过高
+- 移动端存在滚动穿透
